@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>¡Felicidades por tu 10! ⭐</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Poppins:ital,wght@0,400;0,600;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+/* =================================================================
+   CONFIGURACIÓN RÁPIDA  ·  cambia colores aquí si quieres
+   (los textos y el nombre se editan en el <script> de abajo,
+    en el objeto CONFIG)
+   ================================================================= */
+:root{
+  --bg-deep:#190233;
+  --bg-purple:#2E0A5C;
+  --magenta:#FF2E88;
+  --gold:#FFC83D;
+  --cyan:#36E2E6;
+  --cream:#FBF1DC;
+  --ink:#12001F;
+  --halftone: radial-gradient(circle, rgba(255,200,61,.16) 18%, transparent 19%);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{overflow-x:hidden;}
+body{
+  background:
+     radial-gradient(ellipse at 20% 0%, var(--bg-purple), transparent 60%),
+     radial-gradient(ellipse at 90% 100%, #3d0a6e, transparent 55%),
+     var(--bg-deep);
+  color:var(--cream);
+  font-family:'Poppins',system-ui,sans-serif;
+  min-height:100vh;
+  position:relative;
+}
+
+/* halftone overlay sutil sobre todo */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:var(--halftone);
+  background-size:14px 14px;opacity:.5;mix-blend-mode:screen;
+}
+
+/* líneas de velocidad de fondo */
+.speedlines{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.07;
+  background:repeating-conic-gradient(from 0deg at 50% 50%,
+     transparent 0deg, transparent 3deg, var(--gold) 3deg, var(--gold) 3.4deg);
+  animation:spin 60s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+h1,h2,h3,.display{font-family:'Anton',Impact,sans-serif;font-weight:400;letter-spacing:.5px;line-height:.95;text-transform:uppercase;}
+.bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:2px;}
+
+/* =====================  INTRO / PORTAL  ===================== */
+#intro{
+  position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:28px;padding:24px;
+  background:radial-gradient(circle at 50% 40%, #3a0a73, var(--ink) 70%);
+  transition:opacity .8s ease, visibility .8s;
+}
+#intro.gone{opacity:0;visibility:hidden;}
+.intro-go{
+  font-family:'Anton',sans-serif;font-size:clamp(1.4rem,5vw,2.4rem);text-transform:uppercase;
+  color:var(--ink);background:var(--gold);border:none;cursor:pointer;
+  padding:22px 46px;border-radius:6px;letter-spacing:1px;
+  box-shadow:0 0 0 4px var(--ink), 0 0 0 9px var(--gold), 8px 8px 0 var(--magenta);
+  transform:skewX(-6deg);transition:transform .15s, box-shadow .15s;
+}
+.intro-go:hover,.intro-go:focus-visible{transform:skewX(-6deg) scale(1.05);box-shadow:0 0 0 4px var(--ink),0 0 0 9px var(--cyan),10px 10px 0 var(--magenta);outline:none;}
+.intro-sub{max-width:520px;font-size:clamp(.95rem,3.4vw,1.15rem);color:var(--cream);opacity:.85;line-height:1.5;}
+.intro-pre{font-size:clamp(2.4rem,12vw,6rem);color:var(--magenta);text-shadow:4px 4px 0 var(--ink);}
+.gogo{font-family:'Anton',sans-serif;color:var(--gold);opacity:.55;font-size:clamp(1.2rem,5vw,2rem);letter-spacing:6px;}
+
+/* =====================  MÚSICA  ===================== */
+#music-btn{
+  position:fixed;top:14px;right:14px;z-index:150;
+  background:var(--ink);color:var(--gold);border:3px solid var(--gold);
+  border-radius:50px;cursor:pointer;font-family:'Bebas Neue',sans-serif;
+  letter-spacing:1.5px;font-size:.95rem;padding:9px 16px;display:flex;align-items:center;gap:8px;
+  box-shadow:3px 3px 0 var(--magenta);transition:transform .15s;
+}
+#music-btn:hover{transform:translateY(-2px);}
+#music-btn .ico{font-size:1.1rem;line-height:1;}
+
+/* =====================  LAYOUT GENERAL  ===================== */
+main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 18px 80px;}
+section{margin:0 auto;}
+
+/* HERO */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 0 30px;position:relative;}
+.hero .eyebrow{display:inline-block;background:var(--cyan);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,4vw,1.5rem);padding:6px 20px;letter-spacing:3px;transform:rotate(-3deg);box-shadow:4px 4px 0 var(--ink);margin-bottom:18px;}
+.hero h1{
+  font-size:clamp(3rem,15vw,8.5rem);
+  color:var(--gold);
+  text-shadow:
+     5px 5px 0 var(--magenta),
+     -2px -2px 0 var(--ink),
+     0 0 36px rgba(255,46,136,.45);
+  transform:skewX(-4deg);
+}
+.hero .name{
+  display:block;font-size:clamp(2.6rem,13vw,7rem);color:var(--cream);
+  -webkit-text-stroke:2px var(--magenta);text-stroke:2px var(--magenta);
+  text-shadow:3px 3px 0 var(--magenta);margin-top:4px;
+}
+.hero .ten{
+  margin-top:26px;font-family:'Anton',sans-serif;font-size:clamp(4rem,26vw,16rem);
+  line-height:.8;color:var(--magenta);
+  text-shadow:0 0 50px var(--magenta), 6px 6px 0 var(--ink);
+  position:relative;
+}
+.hero .ten span{color:var(--gold);-webkit-text-stroke:3px var(--ink);text-shadow:0 0 50px var(--gold);}
+.hero .tagline{margin-top:24px;max-width:640px;font-size:clamp(1rem,3.6vw,1.3rem);font-style:italic;color:var(--cream);opacity:.92;line-height:1.5;}
+.scroll-hint{margin-top:40px;font-family:'Bebas Neue',sans-serif;letter-spacing:3px;color:var(--gold);font-size:1.1rem;animation:bob 1.6s ease-in-out infinite;}
+@keyframes bob{50%{transform:translateY(10px);}}
+
+/* PANEL DE MENSAJE estilo manga */
+.panel{
+  background:var(--cream);color:var(--ink);
+  border:4px solid var(--ink);border-radius:4px;
+  padding:34px 28px;margin:40px auto;max-width:760px;position:relative;
+  box-shadow:10px 10px 0 var(--magenta);
+  transform:rotate(-.6deg);
+}
+.panel::after{content:'';position:absolute;inset:6px;border:2px solid rgba(18,0,31,.25);pointer-events:none;border-radius:3px;}
+.panel h2{color:var(--magenta);font-size:clamp(1.8rem,8vw,3rem);margin-bottom:14px;text-shadow:2px 2px 0 var(--ink);}
+.panel p{font-size:clamp(1rem,3.6vw,1.18rem);line-height:1.7;margin-bottom:12px;}
+.panel .sign{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;color:var(--magenta);font-size:1.3rem;margin-top:8px;}
+
+/* TÍTULO DE SECCIÓN */
+.sect-title{text-align:center;margin:80px 0 10px;}
+.sect-title .gogo-row{color:var(--gold);opacity:.5;font-family:'Anton',sans-serif;letter-spacing:8px;font-size:clamp(1rem,4vw,1.6rem);}
+.sect-title h2{font-size:clamp(2.2rem,10vw,4.5rem);color:var(--cyan);text-shadow:4px 4px 0 var(--ink),0 0 30px rgba(54,226,230,.4);transform:skewX(-4deg);}
+.sect-title p{color:var(--cream);opacity:.8;margin-top:8px;font-style:italic;}
+
+/* TARJETAS DE REGALO (minijuegos) */
+.gifts{display:grid;grid-template-columns:1fr;gap:34px;margin-top:30px;}
+.gift{
+  background:linear-gradient(160deg,#3a0d72,#220548);
+  border:3px solid var(--gold);border-radius:10px;padding:24px 20px 28px;position:relative;
+  box-shadow:0 0 0 4px var(--ink), 8px 8px 0 rgba(255,46,136,.55);
+  overflow:hidden;
+}
+.gift::before{content:'';position:absolute;top:0;left:0;right:0;height:42px;background:repeating-linear-gradient(45deg,var(--gold),var(--gold) 14px,var(--ink) 14px,var(--ink) 28px);opacity:.85;}
+.gift-num{position:relative;z-index:2;display:inline-block;background:var(--magenta);color:var(--cream);font-family:'Anton',sans-serif;padding:6px 16px;font-size:1.4rem;border:3px solid var(--ink);transform:translateY(-4px) rotate(-2deg);box-shadow:3px 3px 0 var(--ink);}
+.gift h3{margin-top:16px;color:var(--gold);font-size:clamp(1.5rem,6vw,2.2rem);text-shadow:2px 2px 0 var(--ink);}
+.gift .desc{color:var(--cream);opacity:.85;margin:8px 0 18px;font-size:.98rem;line-height:1.5;}
+
+/* botones generales del juego */
+.btn{
+  font-family:'Bebas Neue',sans-serif;letter-spacing:1.5px;font-size:1.15rem;
+  background:var(--gold);color:var(--ink);border:3px solid var(--ink);
+  padding:12px 24px;border-radius:6px;cursor:pointer;box-shadow:4px 4px 0 var(--magenta);
+  transition:transform .12s, box-shadow .12s;
+}
+.btn:hover,.btn:focus-visible{transform:translate(-1px,-1px);box-shadow:6px 6px 0 var(--magenta);outline:none;}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--magenta);}
+.btn.cyan{background:var(--cyan);}
+.btn.mag{background:var(--magenta);color:var(--cream);}
+
+/* === Minijuego 1: caza de estrellas === */
+#catch-arena{position:relative;height:340px;border:2px dashed rgba(255,200,61,.4);border-radius:10px;overflow:hidden;background:rgba(0,0,0,.22);margin-bottom:14px;}
+.catch-target{position:absolute;font-size:2rem;cursor:pointer;user-select:none;will-change:transform;filter:drop-shadow(0 0 6px var(--gold));transition:transform .08s;}
+.catch-target:active{transform:scale(.7);}
+.meter{height:22px;background:rgba(0,0,0,.35);border:2px solid var(--gold);border-radius:50px;overflow:hidden;}
+.meter > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--magenta),var(--gold));transition:width .2s;}
+.catch-msg{margin-top:12px;min-height:46px;text-align:center;font-style:italic;color:var(--gold);font-size:1.05rem;}
+
+/* === Minijuego 2: memoria === */
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:420px;margin:0 auto 14px;}
+.mem-card{aspect-ratio:3/4;border-radius:8px;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .4s;background:transparent;}
+.mem-card.flip,.mem-card.done{transform:rotateY(180deg);}
+.mem-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:8px;backface-visibility:hidden;font-size:clamp(1.4rem,7vw,2rem);border:3px solid var(--ink);}
+.mem-front{background:repeating-linear-gradient(135deg,var(--bg-purple),var(--bg-purple) 8px,#3d0a6e 8px,#3d0a6e 16px);color:var(--gold);}
+.mem-front::after{content:'★';opacity:.5;}
+.mem-back{background:var(--cream);color:var(--ink);transform:rotateY(180deg);}
+.mem-card.done .mem-back{background:var(--gold);box-shadow:0 0 16px var(--gold);}
+.mem-status{text-align:center;color:var(--gold);font-style:italic;min-height:24px;}
+
+/* === Minijuego 3: rasca vales === */
+.scratch-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:6px;}
+.scratch-card{position:relative;border-radius:10px;overflow:hidden;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--magenta);aspect-ratio:3/2;}
+.scratch-prize{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;background:var(--cream);color:var(--ink);}
+.scratch-prize .ico{font-size:2rem;}
+.scratch-prize .txt{font-family:'Poppins';font-weight:800;font-size:.92rem;line-height:1.2;margin-top:4px;}
+.scratch-card canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none;}
+.scratch-hint{text-align:center;color:var(--cream);opacity:.7;font-style:italic;font-size:.9rem;margin-top:10px;}
+
+/* === Final: invocar stand === */
+.summon{text-align:center;margin:30px auto 0;max-width:640px;}
+#summon-btn{
+  font-family:'Anton',sans-serif;font-size:clamp(1.4rem,6vw,2.2rem);text-transform:uppercase;
+  background:var(--magenta);color:var(--cream);border:4px solid var(--ink);
+  padding:20px 40px;border-radius:8px;cursor:pointer;letter-spacing:1px;
+  box-shadow:0 0 0 4px var(--gold),8px 8px 0 var(--ink);transform:skewX(-5deg);
+  transition:transform .12s;
+}
+#summon-btn:hover{transform:skewX(-5deg) scale(1.04);}
+.charge{height:18px;background:rgba(0,0,0,.4);border:2px solid var(--cyan);border-radius:50px;overflow:hidden;max-width:420px;margin:20px auto 0;display:none;}
+.charge > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--gold),var(--magenta));}
+#stand-reveal{display:none;margin-top:30px;}
+.stand-name{font-family:'Anton',sans-serif;font-size:clamp(2rem,9vw,4rem);color:var(--gold);text-shadow:0 0 40px var(--magenta),4px 4px 0 var(--ink);letter-spacing:2px;}
+.stand-name b{color:var(--cyan);}
+.stand-aura{font-size:clamp(3rem,18vw,8rem);line-height:1;animation:pulse 1.4s ease-in-out infinite;filter:drop-shadow(0 0 24px var(--magenta));}
+@keyframes pulse{50%{transform:scale(1.12);}}
+.final-letter{background:var(--cream);color:var(--ink);border:4px solid var(--ink);border-radius:6px;padding:30px 26px;margin:24px auto 0;max-width:680px;text-align:left;box-shadow:10px 10px 0 var(--gold);transform:rotate(.5deg);}
+.final-letter p{line-height:1.75;font-size:clamp(1rem,3.6vw,1.18rem);margin-bottom:12px;}
+.final-letter .from{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;color:var(--magenta);font-size:1.4rem;}
+
+footer{text-align:center;margin-top:80px;color:var(--cream);opacity:.6;font-size:.85rem;line-height:1.6;}
+footer .heart{color:var(--magenta);}
+
+/* confetti layer */
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:120;}
+
+/* floating menacing marks */
+.menace{position:fixed;font-family:'Anton',sans-serif;color:var(--gold);opacity:.12;pointer-events:none;z-index:0;font-size:2.4rem;letter-spacing:4px;}
+
+@media (max-width:520px){
+  .mem-grid{gap:7px;}
+  .panel{padding:26px 18px;box-shadow:7px 7px 0 var(--magenta);}
+  .gift{padding:20px 14px 24px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .speedlines,.stand-aura,.scroll-hint{animation:none;}
+  *{transition-duration:.01ms !important;}
+}
+</style>
+</head>
+<body>
+
+<div class="speedlines"></div>
+
+<!-- ===================== INTRO ===================== -->
+<div id="intro">
+  <div class="gogo">ゴ ゴ ゴ ゴ ゴ</div>
+  <div class="intro-pre" id="intro-pre">¡10!</div>
+  <p class="intro-sub" id="intro-sub">Alguien que te quiere mucho te preparó algo legendario para celebrar tu calificación perfecta.</p>
+  <button class="intro-go" id="intro-go">▶ ABRIR REGALO</button>
+  <div class="gogo">ゴ ゴ ゴ ゴ ゴ</div>
+</div>
+
+<!-- ===================== MÚSICA ===================== -->
+<button id="music-btn" aria-label="Activar o silenciar música"><span class="ico" id="music-ico">♪</span><span id="music-label">MÚSICA</span></button>
+
+<canvas id="confetti"></canvas>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow bebas">Calificación · 100% · Sin errores</span>
+    <h1>Felicidades<span class="name" id="hero-name">Mi Amor</span></h1>
+    <div class="ten">1<span>0</span></div>
+    <p class="tagline" id="hero-tagline">Resolviste cada ecuación... incluida la de mi corazón. Sacar un 10 era lo único que te faltaba demostrar, porque para mí siempre fuiste perfecta.</p>
+    <div class="scroll-hint bebas">▼ baja para tus regalos ▼</div>
+  </section>
+
+  <!-- MENSAJE -->
+  <section class="panel">
+    <h2 id="msg-title">Lo lograste 💪</h2>
+    <p id="msg-1">Sé todo lo que estudiaste, las noches repasando, las dudas y los nervios antes del examen. Hoy todo ese esfuerzo tiene un número con forma de corona: <b>un 10 perfecto</b>.</p>
+    <p id="msg-2">Quise celebrarlo en grande, así que te armé este pequeño mundo lleno de regalitos. Cada uno es un minijuego: juégalos, gánalos y descubre lo que escondí dentro. 💛</p>
+    <p class="sign" id="msg-sign">— Con todo mi orgullo y mi amor.</p>
+  </section>
+
+  <!-- REGALOS -->
+  <div class="sect-title">
+    <div class="gogo-row">ゴ ゴ ゴ ゴ</div>
+    <h2>Tus Regalitos</h2>
+    <p>Cuatro regalos. Cuatro minijuegos. Todos para ti.</p>
+  </div>
+
+  <section class="gifts">
+
+    <!-- Regalo 1: caza de estrellas -->
+    <div class="gift">
+      <span class="gift-num">01</span>
+      <h3 id="g1-title">Caza de Estrellas Doradas</h3>
+      <p class="desc" id="g1-desc">Atrapa las estrellas y corazones que flotan. Cada uno guarda un piropo. Llena la barra para ganar tu primer regalo.</p>
+      <div id="catch-arena"></div>
+      <div class="meter"><i id="catch-bar"></i></div>
+      <p class="catch-msg" id="catch-msg">Toca las estrellas ✨</p>
+    </div>
+
+    <!-- Regalo 2: memoria -->
+    <div class="gift">
+      <span class="gift-num">02</span>
+      <h3 id="g2-title">Memoria del Corazón</h3>
+      <p class="desc" id="g2-desc">Encuentra todas las parejas. Cuando emparejes todo, se abre tu segundo regalo.</p>
+      <div class="mem-grid" id="mem-grid"></div>
+      <p class="mem-status bebas" id="mem-status">Parejas: 0 / 6</p>
+    </div>
+
+    <!-- Regalo 3: rasca vales -->
+    <div class="gift">
+      <span class="gift-num">03</span>
+      <h3 id="g3-title">Rasca Tus Vales</h3>
+      <p class="desc" id="g3-desc">Raspa con el dedo (o el mouse) cada tarjeta para descubrir vales canjeables conmigo. ¡Son de verdad!</p>
+      <div class="scratch-row" id="scratch-row"></div>
+      <p class="scratch-hint" id="g3-hint">Mantén presionado y arrastra para raspar 👆</p>
+    </div>
+
+    <!-- Regalo 4: invocar stand -->
+    <div class="gift">
+      <span class="gift-num">04</span>
+      <h3 id="g4-title">Invoca Tu Poder</h3>
+      <p class="desc" id="g4-desc">El regalo final. Mantén presionado el botón para cargar toda la energía... y revelar lo que de verdad quería decirte.</p>
+      <div class="summon">
+        <button id="summon-btn">「 INVOCAR 」</button>
+        <div class="charge" id="charge"><i id="charge-bar"></i></div>
+        <div id="stand-reveal">
+          <div class="stand-aura">⭐</div>
+          <div class="stand-name">「 <b id="stand-name">AMOR INFINITO</b> 」</div>
+          <div class="final-letter">
+            <p id="final-1">Mi amor, este 10 es tuyo y de nadie más. Lo conseguiste tú, con tu cabeza brillante y tu corazón terco que no se rinde.</p>
+            <p id="final-2">Pero déjame decirte algo que no necesita examen: tú eres mi constante favorita, el límite al que tiende todo lo bueno de mi vida, y mi amor por ti no tiene derivada... porque nunca cambia, solo crece hasta el infinito.</p>
+            <p id="final-3">Estoy increíblemente orgulloso de ti. Hoy y siempre. Te amo. 💛</p>
+            <p class="from" id="final-from">— Tuyo, por siempre.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p id="footer-text">Hecho con <span class="heart">♥</span> solo para ti.</p>
+    <p>ゴ ゴ ゴ</p>
+  </footer>
+</main>
+
+<script>
+/* =================================================================
+   ⭐ PERSONALIZA AQUÍ ⭐
+   Cambia el nombre y los textos a tu gusto. Todo lo demás funciona solo.
+   ================================================================= */
+const CONFIG = {
+  nombre: "Mi Amor",            // ← pon aquí el nombre de tu novia
+
+  // piropos que aparecen al atrapar estrellas (minijuego 1)
+  piropos: [
+    "Eres un 10 en todo, no solo en mate ⭐",
+    "Sabía que podías. Siempre lo supe 💛",
+    "Resolviste mi ecuación favorita: tú + yo.",
+    "Mi genia. Mi orgullo. Mi todo.",
+    "Sumas alegría, restas tristezas y multiplicas mi amor.",
+    "Tu sonrisa vale más que cualquier nota.",
+    "Eres la solución a todos mis problemas.",
+    "Contigo hasta el infinito se queda corto ∞"
+  ],
+
+  // emojis para el juego de memoria (6 parejas)
+  memoria: ["💛","⭐","🧮","📐","🏆","🌙"],
+
+  // vales para rascar (minijuego 3) — ¡cámbialos por los que tú quieras!
+  vales: [
+    { ico:"🤗", txt:"Vale por un abrazo gigante" },
+    { ico:"🍿", txt:"Vale por una cita sorpresa" },
+    { ico:"🎬", txt:"Vale por elegir la peli toda la noche" },
+    { ico:"💋", txt:"Vale por mil besos" },
+    { ico:"🍰", txt:"Vale por un postre a tu antojo" },
+    { ico:"👑", txt:"Vale por un día siendo consentida" }
+  ],
+
+  // nombre dramático del "poder" final (estilo JoJo)
+  standName: "AMOR INFINITO"
+};
+
+/* aplica nombre/datos al HTML */
+document.getElementById('hero-name').textContent = CONFIG.nombre;
+document.getElementById('stand-name').textContent = CONFIG.standName;
+document.title = "¡Felicidades por tu 10, " + CONFIG.nombre + "! ⭐";
+
+/* =================================================================
+   MÚSICA  ·  pista original sintetizada (Web Audio API)
+   --------------------------------------------------------------
+   ¿Tienes el MP3 que quieres usar? Reemplaza toda esta sección por:
+     const audio = new Audio('tu-cancion.mp3'); audio.loop = true;
+     y conéctalo al botón #music-btn.
+   ================================================================= */
+let audioCtx=null, musicOn=false, schedTimer=null, step=0, nextNoteTime=0;
+const BPM=142, stepDur=15/BPM; // semicorcheas
+let master;
+
+function note(n){ return 440*Math.pow(2,(n-69)/12); } // midi -> Hz
+// progresión dramática en menor: bajo + acordes de "metales"
+const bass = [33,33,40,33, 36,36,43,36, 38,38,45,38, 31,31,38,31]; // 16 steps
+const stab = [ // acordes (midi) que entran en ciertos pasos
+  [57,60,64], null,[57,60,64],null, [60,63,67],null,null,null,
+  [62,65,69],null,[62,65,69],null, [55,59,62],null,[55,59,62],null
+];
+
+function blip(freq,t,dur,type,vol,toFreq){
+  const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+  o.type=type; o.frequency.setValueAtTime(freq,t);
+  if(toFreq) o.frequency.exponentialRampToValueAtTime(toFreq,t+dur);
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(vol,t+0.012);
+  g.gain.exponentialRampToValueAtTime(0.0008,t+dur);
+  o.connect(g).connect(master); o.start(t); o.stop(t+dur+0.02);
+}
+function kick(t){ blip(150,t,0.18,'sine',0.9,45); }
+function hat(t){
+  const b=audioCtx.createBuffer(1,audioCtx.sampleRate*0.05,audioCtx.sampleRate);
+  const d=b.getChannelData(0); for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1);
+  const s=audioCtx.createBufferSource(); s.buffer=b;
+  const hp=audioCtx.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=7000;
+  const g=audioCtx.createGain(); g.gain.setValueAtTime(0.18,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.05);
+  s.connect(hp).connect(g).connect(master); s.start(t); s.stop(t+0.06);
+}
+function scheduler(){
+  while(nextNoteTime < audioCtx.currentTime + 0.12){
+    const t=nextNoteTime, s=step%16;
+    blip(note(bass[s]),t,stepDur*0.9,'sawtooth',0.22);          // bajo
+    if(stab[s]) stab[s].forEach(m=>blip(note(m+12),t,stepDur*1.6,'square',0.07)); // metales
+    if(s%4===0) kick(t);
+    if(s%2===1) hat(t);
+    if(s===8) kick(t);
+    nextNoteTime+=stepDur; step++;
+  }
+  schedTimer=setTimeout(scheduler,25);
+}
+function startMusic(){
+  if(!audioCtx){
+    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    master=audioCtx.createGain(); master.gain.value=0.5; master.connect(audioCtx.destination);
+  }
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  if(!musicOn){ step=0; nextNoteTime=audioCtx.currentTime+0.06; scheduler(); musicOn=true; updateMusicBtn(); }
+}
+function stopMusic(){ if(schedTimer)clearTimeout(schedTimer); if(audioCtx)audioCtx.suspend(); musicOn=false; updateMusicBtn(); }
+function updateMusicBtn(){
+  document.getElementById('music-ico').textContent = musicOn?'♪':'✕';
+  document.getElementById('music-label').textContent = musicOn?'MÚSICA':'SILENCIO';
+}
+document.getElementById('music-btn').addEventListener('click',()=>{ musicOn?stopMusic():startMusic(); });
+
+/* =================================================================
+   INTRO
+   ================================================================= */
+document.getElementById('intro-go').addEventListener('click',()=>{
+  document.getElementById('intro').classList.add('gone');
+  startMusic();
+  burst(160);
+  setTimeout(()=>document.getElementById('intro').style.display='none',900);
+});
+
+/* =================================================================
+   CONFETTI / ráfagas
+   ================================================================= */
+const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
+let parts=[]; function resize(){cv.width=innerWidth;cv.height=innerHeight;} resize(); addEventListener('resize',resize);
+const COLORS=['#FFC83D','#FF2E88','#36E2E6','#FBF1DC'];
+function burst(n,x,y){
+  x=x??innerWidth/2; y=y??innerHeight/3;
+  for(let i=0;i<n;i++){
+    parts.push({x,y,vx:(Math.random()-.5)*9,vy:Math.random()*-11-3,
+      g:0.28,life:90+Math.random()*40,
+      c:COLORS[Math.random()*COLORS.length|0],s:5+Math.random()*7,r:Math.random()*6.28,vr:(Math.random()-.5)*.3});
+  }
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts=parts.filter(p=>p.life>0);
+  parts.forEach(p=>{
+    p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.life--;
+    cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;
+    cx.globalAlpha=Math.min(1,p.life/40);
+    cx.fillRect(-p.s/2,-p.s/2,p.s,p.s*0.6);cx.restore();
+  });
+  requestAnimationFrame(loop);
+}
+loop();
+
+/* =================================================================
+   MINIJUEGO 1 · Caza de estrellas
+   ================================================================= */
+(function(){
+  const arena=document.getElementById('catch-arena');
+  const bar=document.getElementById('catch-bar');
+  const msg=document.getElementById('catch-msg');
+  const ICONS=['⭐','💛','🌟','✨','💖'];
+  const NEED=8; let got=0, done=false, spawnT;
+  function spawn(){
+    if(done) return;
+    const el=document.createElement('div');
+    el.className='catch-target';
+    el.textContent=ICONS[Math.random()*ICONS.length|0];
+    const w=arena.clientWidth-40;
+    el.style.left=(Math.random()*w)+'px';
+    el.style.top=(arena.clientHeight-10)+'px';
+    arena.appendChild(el);
+    const dur=2600+Math.random()*1400; const start=performance.now();
+    const drift=(Math.random()-.5)*60;
+    function rise(now){
+      const k=(now-start)/dur;
+      if(k>=1||done){ el.remove(); return; }
+      el.style.transform=`translate(${drift*k}px, ${-(arena.clientHeight-0)*k}px)`;
+      requestAnimationFrame(rise);
+    }
+    requestAnimationFrame(rise);
+    const grab=(e)=>{
+      e.preventDefault();
+      if(done) return;
+      const r=el.getBoundingClientRect();
+      burst(14, r.left+r.width/2, r.top+r.height/2);
+      got++;
+      bar.style.width=Math.min(100,(got/NEED)*100)+'%';
+      msg.textContent=CONFIG.piropos[(got-1)%CONFIG.piropos.length];
+      el.remove();
+      if(got>=NEED) win();
+    };
+    el.addEventListener('click',grab);
+    el.addEventListener('touchstart',grab,{passive:false});
+  }
+  function win(){
+    done=true; clearInterval(spawnT);
+    arena.querySelectorAll('.catch-target').forEach(e=>e.remove());
+    msg.innerHTML='<b style="color:var(--cyan)">¡Regalo 1 desbloqueado!</b> Eres mi estrella favorita 🌟';
+    burst(90, arena.getBoundingClientRect().left+arena.clientWidth/2, arena.getBoundingClientRect().top+120);
+  }
+  // arranca cuando se ve por primera vez
+  let started=false;
+  const io=new IntersectionObserver((ents)=>{
+    ents.forEach(en=>{ if(en.isIntersecting && !started){ started=true; spawnT=setInterval(spawn,720); spawn(); } });
+  },{threshold:.3});
+  io.observe(arena);
+})();
+
+/* =================================================================
+   MINIJUEGO 2 · Memoria
+   ================================================================= */
+(function(){
+  const grid=document.getElementById('mem-grid');
+  const status=document.getElementById('mem-status');
+  let deck=[...CONFIG.memoria,...CONFIG.memoria];
+  for(let i=deck.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[deck[i],deck[j]]=[deck[j],deck[i]];}
+  let first=null, lock=false, matched=0;
+  deck.forEach(sym=>{
+    const card=document.createElement('div'); card.className='mem-card';
+    card.innerHTML=`<div class="mem-face mem-front"></div><div class="mem-face mem-back">${sym}</div>`;
+    card.dataset.sym=sym;
+    card.addEventListener('click',()=>{
+      if(lock||card.classList.contains('flip')||card.classList.contains('done'))return;
+      card.classList.add('flip');
+      if(!first){ first=card; return; }
+      if(first.dataset.sym===card.dataset.sym){
+        first.classList.add('done'); card.classList.add('done');
+        matched++; status.textContent=`Parejas: ${matched} / 6`;
+        first=null;
+        if(matched===6) finish();
+      } else {
+        lock=true;
+        setTimeout(()=>{ first.classList.remove('flip'); card.classList.remove('flip'); first=null; lock=false; },750);
+      }
+    });
+    grid.appendChild(card);
+  });
+  function finish(){
+    status.innerHTML='<b style="color:var(--cyan)">¡Regalo 2 desbloqueado!</b> Encontraste todas las parejas, como me encontraste a mí 💛';
+    const r=grid.getBoundingClientRect();
+    burst(100, r.left+r.width/2, r.top+r.height/2);
+  }
+})();
+
+/* =================================================================
+   MINIJUEGO 3 · Rasca vales (canvas scratch-off)
+   ================================================================= */
+(function(){
+  const row=document.getElementById('scratch-row');
+  CONFIG.vales.forEach(v=>{
+    const card=document.createElement('div'); card.className='scratch-card';
+    card.innerHTML=`<div class="scratch-prize"><div class="ico">${v.ico}</div><div class="txt">${v.txt}</div></div><canvas></canvas>`;
+    row.appendChild(card);
+    const cvs=card.querySelector('canvas'); const ctx=cvs.getContext('2d');
+    let drawing=false, revealed=false;
+    function setup(){
+      const r=card.getBoundingClientRect();
+      cvs.width=r.width; cvs.height=r.height;
+      // capa "metálica" para raspar
+      const g=ctx.createLinearGradient(0,0,r.width,r.height);
+      g.addColorStop(0,'#7a4dbd'); g.addColorStop(.5,'#FFC83D'); g.addColorStop(1,'#FF2E88');
+      ctx.fillStyle=g; ctx.fillRect(0,0,r.width,r.height);
+      ctx.fillStyle='rgba(18,0,31,.85)'; ctx.font='bold 13px Poppins, sans-serif'; ctx.textAlign='center';
+      ctx.fillText('★ RASPA AQUÍ ★', r.width/2, r.height/2+4);
+      ctx.globalCompositeOperation='destination-out';
+    }
+    setTimeout(setup,60); addEventListener('resize',setup);
+    function pos(e){
+      const r=cvs.getBoundingClientRect();
+      const t=e.touches?e.touches[0]:e;
+      return {x:t.clientX-r.left, y:t.clientY-r.top};
+    }
+    function scratch(e){
+      if(!drawing) return; e.preventDefault();
+      const p=pos(e);
+      ctx.beginPath(); ctx.arc(p.x,p.y,18,0,7); ctx.fill();
+      checkReveal();
+    }
+    function checkReveal(){
+      if(revealed) return;
+      const img=ctx.getImageData(0,0,cvs.width,cvs.height).data;
+      let clear=0; for(let i=3;i<img.length;i+=400){ if(img[i]===0)clear++; }
+      if(clear/(img.length/400) > 0.5){
+        revealed=true; cvs.style.transition='opacity .5s'; cvs.style.opacity='0';
+        const r=card.getBoundingClientRect(); burst(30,r.left+r.width/2,r.top+r.height/2);
+        setTimeout(()=>cvs.remove(),500);
+      }
+    }
+    cvs.addEventListener('mousedown',e=>{drawing=true;scratch(e);});
+    cvs.addEventListener('mousemove',scratch);
+    addEventListener('mouseup',()=>drawing=false);
+    cvs.addEventListener('touchstart',e=>{drawing=true;scratch(e);},{passive:false});
+    cvs.addEventListener('touchmove',scratch,{passive:false});
+    cvs.addEventListener('touchend',()=>drawing=false);
+  });
+})();
+
+/* =================================================================
+   MINIJUEGO 4 · Invocar poder (cargar manteniendo presionado)
+   ================================================================= */
+(function(){
+  const btn=document.getElementById('summon-btn');
+  const charge=document.getElementById('charge');
+  const cbar=document.getElementById('charge-bar');
+  const reveal=document.getElementById('stand-reveal');
+  let holding=false, prog=0, raf, summoned=false;
+  function tick(){
+    if(!holding||summoned)return;
+    prog=Math.min(100,prog+2.2);
+    cbar.style.width=prog+'%';
+    if(prog>=100){ doSummon(); return; }
+    raf=requestAnimationFrame(tick);
+  }
+  function down(e){ e.preventDefault(); if(summoned)return; holding=true; charge.style.display='block'; if(!musicOn)startMusic(); tick(); }
+  function up(){ if(summoned)return; holding=false; cancelAnimationFrame(raf); prog=Math.max(0,prog-12); cbar.style.width=prog+'%'; if(prog>0){ const drain=setInterval(()=>{prog=Math.max(0,prog-6);cbar.style.width=prog+'%';if(prog<=0)clearInterval(drain);},60);} }
+  function doSummon(){
+    summoned=true; holding=false;
+    btn.style.display='none'; charge.style.display='none';
+    reveal.style.display='block';
+    reveal.scrollIntoView({behavior:'smooth',block:'center'});
+    const fire=()=>burst(120);
+    fire(); setTimeout(fire,400); setTimeout(fire,800);
+  }
+  btn.addEventListener('mousedown',down); addEventListener('mouseup',up);
+  btn.addEventListener('touchstart',down,{passive:false}); btn.addEventListener('touchend',up);
+})();
+
+/* marcas "menacing" flotantes de fondo */
+(function(){
+  for(let i=0;i<6;i++){
+    const m=document.createElement('div'); m.className='menace'; m.textContent='ゴゴゴ';
+    m.style.left=(Math.random()*90)+'vw'; m.style.top=(Math.random()*200+30)+'vh';
+    m.style.transform=`rotate(${(Math.random()-.5)*30}deg)`;
+    document.body.appendChild(m);
+  }
+})();
+</script>
+</body>
+</html>
